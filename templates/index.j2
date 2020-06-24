@@ -1,0 +1,37 @@
+{% extends 'partials/base.j2' %} 
+
+{% block head %}
+    <title>Task Master</title>
+{% endblock head %} 
+
+{% block body %} 
+    <div class="content">
+        <h1>Task Master</h1>
+        {% if tasks: %}
+            <table>
+            <tr>
+                <th>Task</th>
+                <th>Actions</th>
+            </tr>
+            {% for e in tasks %}
+                <tr>
+                <td>{{ e["task"] }}</td>
+                <td>
+                    <a href="/delete/{{e['_id']}}">Delete</a>
+                    <br>
+                    <a href="/update/{{e['_id']}}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <h4>No tasks were found! Add one below.</h4>
+        {% endif %}
+        
+
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
+{% endblock body %}
